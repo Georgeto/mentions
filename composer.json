@@ -18,7 +18,12 @@
 			"name": "InuYaksa",
 			"homepage": "http://areaaperta.com/",
 			"role": "Porting to PhpBB3.2"
-		}    
+		},
+		{
+			"name": "Ereza",
+			"homepage": "http://www.eduardereza.com/",
+			"role": "Fix some bugs in phpBB 3.2"
+		}
 	],
 	"require": {
 		"php": ">=5.4.0"

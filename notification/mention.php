@@ -46,7 +46,7 @@ class mention extends \phpbb\notification\type\post
 	protected $mentions;
 
   
-  public function set_mentions(\wolfsblvt\mentions\core\mentions $mentions)
+	public function set_mentions(\wolfsblvt\mentions\core\mentions $mentions)
 	{
 		$this->mentions = $mentions;
 	}
@@ -78,9 +78,9 @@ class mention extends \phpbb\notification\type\post
 		$users = $this->mentions->get_mentioned_users($post['post_text']);
 		$user_ids = array_map(function ($value) { return (int) $value['user_id']; }, $users);
 
-    $notify_users = $this->get_authorised_recipients($user_ids, $post['forum_id'], $options, true);
+		$notify_users = $this->get_authorised_recipients($user_ids, $post['forum_id'], $options, true);
     
-    if (empty($notify_users)) {
+		if (empty($notify_users)) {
 			return array();
 		}    
 
@@ -117,56 +117,11 @@ class mention extends \phpbb\notification\type\post
 	 */
 	public function update_notifications($post)
 	{
-		$old_notifications = array();
-    
-/*    
-    if ($this->notifications_table) {
-    
-      $sql = 'SELECT n.user_id
-        FROM ' . $this->notifications_table . ' n, ' . $this->notification_types_table . ' nt
-        WHERE n.notification_type_id = ' . (int) $this->notification_type_id . '
-          AND n.item_id = ' . self::get_item_id($post) . '
-          AND nt.notification_type_id = n.notification_type_id
-          AND nt.notification_type_enabled = 1';
-      $result = $this->db->sql_query($sql);
-      while ($row = $this->db->sql_fetchrow($result))
-      {
-        $old_notifications[] = $row['user_id'];
-      }
-      $this->db->sql_freeresult($result);
-      
-    }
-*/    
-
 		// Find the new users to notify
-		$notifications = $this->find_users_for_notification($post);  // updated for 3.2
-
-		// Find the notifications we must delete
-//		$remove_notifications = array_diff($old_notifications, array_keys($notifications));  useless
-
-		// Find the notifications we must add
-/*    
-		$add_notifications = array();    
-		foreach (array_diff(array_keys($notifications), $old_notifications) as $user_id)
-		{
-			$add_notifications[$user_id] = $notifications[$user_id];
-		}
-*/    
+		$notifications = $this->find_users_for_notification($post); // updated for 3.2
 
 		// Add the necessary notifications
-		$this->notification_manager->add_notifications_for_users($this->get_type(), $post, $notifications); //$add_notifications);
-
-		// Remove the necessary notifications
-/*    
-		if (!empty($remove_notifications))
-		{
-			$sql = 'DELETE FROM ' . $this->notifications_table . '
-				WHERE notification_type_id = ' . (int) $this->notification_type_id . '
-					AND item_id = ' . self::get_item_id($post) . '
-					AND ' . $this->db->sql_in_set('user_id', $remove_notifications);
-			$this->db->sql_query($sql);
-		}
-*/    
+		$this->notification_manager->add_notifications_for_users($this->get_type(), $post, $notifications);
 
 		// return true to continue with the update code in the notifications service (this will update the rest of the notifications)
 		return true;
