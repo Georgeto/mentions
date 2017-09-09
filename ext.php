@@ -88,9 +88,9 @@ class ext extends \phpbb\extension\base
 
 		$phpbb_db = $this->container->get("dbal.conn");
 
-		$sql = 'SELECT bbcode_id
-				FROM ' . BBCODES_TABLE . '
-				WHERE bbcode_tag = "mention" OR bbcode_tag = "mention="';
+		$sql = "SELECT bbcode_id
+				FROM " . BBCODES_TABLE . "
+				WHERE bbcode_tag = 'mention' OR bbcode_tag = 'mention='";
 		$result = $phpbb_db->sql_query($sql);
 		$row = $phpbb_db->sql_fetchrow($result);
 		$bbcode_exists = ($row['bbcode_id']) ? true : false;
