@@ -113,6 +113,7 @@ class mentions
 			'active_bbcode'					=> (bool)$this->config['wolfsblvt.mentions.active_bbcode'],
 			'active_bbcode_text'			=> (bool)$this->config['wolfsblvt.mentions.active_bbcode_text'],
 			'active_at'						=> (bool)$this->config['wolfsblvt.mentions.active_at'],
+			'image_inline'					=> (bool)$this->config['wolfsblvt.mentions.image_inline'],
 			'autocomplete_enabled'			=> (bool)$this->config['wolfsblvt.mentions.autocomplete_enabled'],
 			'autocomplete_topic_posters'	=> (bool)$this->config['wolfsblvt.mentions.autocomplete_topic_posters'],
 			'autocomplete_autoclose_bbcode'	=> (bool)$this->config['wolfsblvt.mentions.autocomplete_autoclose_bbcode'],
@@ -468,22 +469,25 @@ class mentions
 				'user_id'			=> $row['user_id'],
 				'posts'				=> $row['user_posts'],
 				'colour'			=> $row['user_colour'],
-				'avatar'			=> phpbb_get_user_avatar($row),
 				'username_full'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 				'username_no_profile'	=> get_username_string('no_profile', $row['user_id'], $row['username'], $row['user_colour']),
 			);
 
-			if ($user_data['avatar'] == '')
+			if ($this->config['wolfsblvt.mentions.image_inline'])
 			{
-				$default_avatar_url = $this->path_helper->get_web_root_path() . $this->ext_root_path . '/styles/' . $this->user->style['style_path'] . '/theme' . '/images/no_avatar.gif';
-
-				// Check if file exists, otherwise take from "/all" folder. The administrator hasn't chosen a specific no_avatar avatar for this style then
-				if (!file_exists($default_avatar_url))
+				$user_data['avatar'] = phpbb_get_user_avatar($row);
+				if ($user_data['avatar'] == '')
 				{
-					$default_avatar_url = $this->path_helper->get_web_root_path() . $this->ext_root_path . '/styles/all/theme' . '/images/no_avatar.gif';
-				}
+					$default_avatar_url = $this->path_helper->get_web_root_path() . $this->ext_root_path . '/styles/' . $this->user->style['style_path'] . '/theme' . '/images/no_avatar.gif';
 
-				$user_data['avatar'] = '<img src="' . $default_avatar_url . '" width="100" height="100" alt="' . $this->user->lang['USER_AVATAR'] . '">';
+					// Check if file exists, otherwise take from "/all" folder. The administrator hasn't chosen a specific no_avatar avatar for this style then
+					if (!file_exists($default_avatar_url))
+					{
+						$default_avatar_url = $this->path_helper->get_web_root_path() . $this->ext_root_path . '/styles/all/theme' . '/images/no_avatar.gif';
+					}
+
+					$user_data['avatar'] = '<img src="' . $default_avatar_url . '" width="100" height="100" alt="' . $this->user->lang['USER_AVATAR'] . '">';
+				}
 			}
 
 			$user_list[$row['username_clean']] = $user_data;

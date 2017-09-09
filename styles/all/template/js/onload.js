@@ -25,8 +25,6 @@ $(document).ready(function () {
 		data: $.wolfsblvt.mentions_json_data.ajax_path,
 		searchKey: $.wolfsblvt.mentions_json_data.searchKey,
 		limit: 5,
-		displayTpl: '<li><div class="mentions-avatar">${avatar}</div> ${username_no_profile}</li>',
-
 		maxLen: $.wolfsblvt.mentions_json_data.max_length,
 		startWithSpace: true,
 		displayTimeout: 300,
@@ -35,6 +33,12 @@ $(document).ready(function () {
 		suffix: '',
 		hideWithoutSuffix: true,
 	};
+
+	if ($.wolfsblvt.mentions_json_data.image_inline) {
+		default_options.displayTpl = '<li><div class="mentions-avatar">${avatar}</div> ${username_no_profile}</li>';
+	} else {
+		default_options.displayTpl = '<li>${username_no_profile}</li>';
+	}
 
 	// Unset data if we want to load it remove, and not at start
 	// Then add the remote filter
