@@ -1,10 +1,10 @@
-Subject: Benachrichtigung über neue Erwähnung — „{TOPIC_TITLE}“
+Subject: Benachrichtigung Ã¼ber neue ErwÃ¤hnung â€” â€ž{TOPIC_TITLE}â€œ
 
 Hallo {USERNAME},
 
-du erhältst diese Benachrichtigung, weil „{AUTHOR_NAME}“ dich im Thema „{TOPIC_TITLE}“ auf „{SITENAME}“ erwähnt hat. Du kannst den folgenden Link benutzen, um die erstellte Antwort anzusehen.
+du erhÃ¤ltst diese Benachrichtigung, weil â€ž{AUTHOR_NAME}â€œ dich im Thema â€ž{TOPIC_TITLE}â€œ auf â€ž{SITENAME}â€œ erwÃ¤hnt hat. Du kannst den folgenden Link benutzen, um die erstellte Antwort anzusehen.
 
-Du kannst dir den Beitrag, in dem du erwähnt wurdest, ansehen, wenn du folgenden Link aufrufst:
+Du kannst dir den Beitrag, in dem du erwÃ¤hnt wurdest, ansehen, wenn du folgenden Link aufrufst:
 {U_VIEW_POST}
 
 Du kannst dir das Thema ansehen, wenn du folgenden Link aufrufst:
@@ -13,7 +13,7 @@ Du kannst dir das Thema ansehen, wenn du folgenden Link aufrufst:
 Du kannst dir das Forum ansehen, wenn du folgenden Link aufrufst:
 {U_FORUM}
 
-Wenn du nicht länger E-Mails erhalten möchtest, wenn du in einem Beitrag erwähnt wurdest, musst du deine Benachrichtigungseinstellungen ändern. Diese kannst du ändern, wenn du folgenden Link aufrufst: 
+Wenn du nicht lÃ¤nger E-Mails erhalten mÃ¶chtest, wenn du in einem Beitrag erwÃ¤hnt wurdest, musst du deine Benachrichtigungseinstellungen Ã¤ndern. Diese kannst du Ã¤ndern, wenn du folgenden Link aufrufst: 
 {U_NOTIFICATION_SETTINGS}
 
 {EMAIL_SIG}
